@@ -15,14 +15,17 @@ public class ProductCategory {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
-    @Column(name="categoryId")
-    private int categoryID;
-    
+    private int cId;
+
     private String categoryName;
 
-    @OneToMany
-    private List<Product> productList;
+    @OneToMany(mappedBy = "categories")
+    private List<Product> products;
 
-    @OneToMany(mappedBy = "productCategories")
-    private List<ProductCategory > productCategories;
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "parentId")
+    private ProductCategory parent_category;
+
+    @OneToMany(mappedBy = "parent_category", cascade={CascadeType.ALL})
+    private List<ProductCategory > subcategories;
 }

@@ -17,7 +17,7 @@ public class Product {
     @Id
     @GeneratedValue
     @Setter(AccessLevel.NONE)
-    private int productID;
+    private int pdtId;
 
     private String color;
     private Long productNumber;
@@ -33,10 +33,10 @@ public class Product {
     private ProductSize productSize;
 
     @OneToOne
-    private ProductPrice productPrice;
+    private ProductPrice productPrice_;
 
-    @OneToMany(mappedBy = "productList")
-    private List<ProductCategory> categoryList;
+    @OneToMany
+    private List<ProductCategory> categories;
 
     @OneToOne
     private ProductFlags flags;
