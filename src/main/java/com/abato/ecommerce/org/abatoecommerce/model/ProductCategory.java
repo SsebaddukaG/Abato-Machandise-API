@@ -28,4 +28,12 @@ public class ProductCategory {
 
     @OneToMany(mappedBy = "parent_category", cascade={CascadeType.ALL})
     private List<ProductCategory > subcategories;
+
+    public void setcId(int cId) {
+        this.cId = cId;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 }
