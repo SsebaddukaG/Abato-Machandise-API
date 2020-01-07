@@ -1,6 +1,6 @@
 package com.abato.ecommerce.org.abatoecommerce;
 
-import com.abato.ecommerce.org.abatoecommerce.dao.ICategoryRepository;
+import com.abato.ecommerce.org.abatoecommerce.dao.CategoryRepository;
 import com.abato.ecommerce.org.abatoecommerce.model.ProductCategory;
 import com.abato.ecommerce.org.abatoecommerce.services.CategoryService;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ class AbatoEcommerceApplicationTests {
     private CategoryService service;
 
     @MockBean
-    private ICategoryRepository repository;
+    private CategoryRepository repository;
 
     @Test
     void contextLoads() {
@@ -25,10 +25,7 @@ class AbatoEcommerceApplicationTests {
 
     @Test
     public void addCategory() {
-        ProductCategory category = new ProductCategory();
-        category.setCategoryName("Abato");
-        category.setcId(1);
-
+        ProductCategory category = new ProductCategory("Abato",1);
         when(repository.save(category)).thenReturn(category);
         assertEquals(category,service.addCategory(category));
     }
