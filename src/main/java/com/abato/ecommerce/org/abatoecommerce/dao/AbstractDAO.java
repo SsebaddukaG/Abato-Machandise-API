@@ -18,7 +18,7 @@ public abstract class AbstractDAO<T> implements CrudRepository<T,Integer> {
 
     @Override
     public <S extends T> S save(S s) {
-        entityManager.persist(s);
+        if (s!=null)entityManager.persist(s);
         return s;
     }
 

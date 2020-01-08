@@ -8,7 +8,13 @@ import java.util.Optional;
 public interface ICategoryService {
     ProductCategory addCategory(ProductCategory category);
 
+    ProductCategory addSubCategory(String categoryCode,ProductCategory category);
+
+    public boolean existsByName(String name);
+
     Optional<ProductCategory> getCategoryById(int id);
+
+    Optional<ProductCategory> findByCategoryCode(String categoryCode);
 
     void removeCategory(ProductCategory category);
 

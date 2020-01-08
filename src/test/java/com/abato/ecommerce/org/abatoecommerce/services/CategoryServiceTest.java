@@ -62,10 +62,21 @@ public class CategoryServiceTest {
 
     @Test
     public void findCategoryByName() {
-        List<ProductCategory> categories = new ArrayList<>();
-        categories.add(new ProductCategory("Clothes",1));
-        categories.add(new ProductCategory("abato",2));
 
-        Assert.assertEquals(categories.get(1),categoryService.findCategoryByName("abato"));
+       when(categoryRepository.findCategoryByName("Clothes")).thenReturn(Optional.of(categoryMap.get(1)));
+
+        Assert.assertEquals(Optional.of(new ProductCategory("Clothes",1)),categoryService.findCategoryByName("Clothes"));
+    }
+
+    @Test
+    public void addSubCategory() {
+       // Assert.assertEquals(category,categoryService.addSubCategory(1,category));
+    }
+
+    @Test
+    public void existsByName() {
+        when(categoryRepository.existsByName(categoryMap.get(2).getCategoryName())).thenReturn(true);
+
+        Assert.assertEquals(true,categoryService.existsByName("abato"));
     }
 }

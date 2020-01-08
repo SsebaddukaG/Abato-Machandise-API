@@ -29,8 +29,36 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
+    public ProductCategory addSubCategory(String categoryCode,ProductCategory category) {
+        if (category==null) return null;
+
+        if (this.getAllCategories()==null){
+            return categoryRepository.save(category);
+        }
+        else{
+            if (!this.existsByName(category.getCategoryName())){
+                ProductCategory found = this.findByCategoryCode(categoryCode).get();
+                category.setParent_category(found);
+                return categoryRepository.save(category);
+            }
+            System.err.println("Category "  + category.getCategoryName() + " already exists");
+            return null;
+        }
+    }
+
+    @Override
+    public boolean existsByName(String name) {
+        return categoryRepository.existsByName(name);
+    }
+
+    @Override
     public Optional<ProductCategory> getCategoryById(int id) {
         return categoryRepository.findById(id);
+    }
+
+    @Override
+    public Optional<ProductCategory> findByCategoryCode(String categoryCode) {
+        return categoryRepository.findByCategoryCode(categoryCode);
     }
 
     @Override
@@ -45,9 +73,7 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public Optional<ProductCategory> findCategoryByName(String categoryName) {
-        return categoryRepository.findAllCategories().stream()
-                .filter(category -> category.getCategoryName().equals(categoryName))
-                .findFirst();
+        return categoryRepository.findCategoryByName(categoryName);
     }
 
 }

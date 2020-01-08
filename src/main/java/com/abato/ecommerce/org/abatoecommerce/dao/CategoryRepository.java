@@ -10,12 +10,25 @@ import java.util.Optional;
 public class CategoryRepository extends AbstractDAO<ProductCategory> {
     @Override
     public Optional<ProductCategory> findById(Integer integer) {
-        return this.findAllCategories().stream().filter(category -> category.getcId() == integer).findFirst();
+        return this.findAllCategories().stream().filter(category -> category.getCId() == integer).findFirst();
     }
 
     @Override
     public boolean existsById(Integer integer) {
         return false;
+    }
+
+    public boolean existsByName(String name){
+        if (name!=null){
+            return this.findAllCategories().stream().anyMatch(category -> category.getCategoryName().equalsIgnoreCase(name));
+        }
+        return false;
+    }
+
+    public Optional<ProductCategory> findCategoryByName(String categoryName) {
+        return this.findAllCategories().stream()
+                .filter(category -> category.getCategoryName().equals(categoryName))
+                .findFirst();
     }
 
     @Override
@@ -24,9 +37,11 @@ public class CategoryRepository extends AbstractDAO<ProductCategory> {
         return iterable;
     }
 
-    /*public Optional<T> findByName(String name){
-        return entityManager.createNativeQuery("select ")
-    }*/
+    public Optional<ProductCategory> findByCategoryCode(String categoryCode){
+        return this.findAllCategories().stream()
+                .filter(category -> category.getCategoryCode().equalsIgnoreCase(categoryCode))
+                .findFirst();
+    }
 
     public List<ProductCategory> findAllCategories() {
         return entityManager.createNativeQuery("select * from product_category", ProductCategory.class).getResultList();

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,8 +19,9 @@ public class ProductCategory {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
+    @NotNull
     private int cId;
-
+    @NotNull
     private String categoryName;
 
     @OneToMany(mappedBy = "categories")
@@ -27,56 +29,20 @@ public class ProductCategory {
 
     @ManyToOne
     @JoinColumn(name = "parentId")
-    @JsonManagedReference
+    @JsonBackReference
     private ProductCategory parent_category;
 
+
+    @Getter
+    private String categoryCode;
+
     @OneToMany(mappedBy = "parent_category")
-    @JsonBackReference
+    @JsonManagedReference
     private List<ProductCategory > subcategories;
 
     public ProductCategory(String categoryName,int cId) {
         this.categoryName = categoryName;
         this.cId=cId;
-    }
-
-    public void setcId(int cId) {
-        this.cId = cId;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public int getcId() {
-        return cId;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public ProductCategory getParent_category() {
-        return parent_category;
-    }
-
-    public void setParent_category(ProductCategory parent_category) {
-        this.parent_category = parent_category;
-    }
-
-    public List<ProductCategory> getSubcategories() {
-        return subcategories;
-    }
-
-    public void setSubcategories(List<ProductCategory> subcategories) {
-        this.subcategories = subcategories;
     }
 
     @Override
