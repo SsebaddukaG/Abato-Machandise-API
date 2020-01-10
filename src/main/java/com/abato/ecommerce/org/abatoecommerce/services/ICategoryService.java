@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ICategoryService {
     ProductCategory addCategory(ProductCategory category);
-
+    List<ProductCategory> findAllCategories();
     ProductCategory addSubCategory(String categoryCode,ProductCategory category);
 
     public boolean existsByName(String name);

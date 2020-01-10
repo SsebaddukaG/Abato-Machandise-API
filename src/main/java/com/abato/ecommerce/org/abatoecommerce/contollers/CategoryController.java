@@ -16,9 +16,7 @@ public class CategoryController {
     @Autowired
     public CategoryService categoryService;
 
-    private Product product;
-
-    @RequestMapping(value = "/addCategory", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/addMainCategory", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ProductCategory addCategory(@RequestBody ProductCategory category) {
         return categoryService.addCategory(category);
     }

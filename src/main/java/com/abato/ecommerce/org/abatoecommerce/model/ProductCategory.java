@@ -24,7 +24,8 @@ public class ProductCategory {
     @NotNull
     private String categoryName;
 
-    @OneToMany(mappedBy = "categories")
+    @OneToMany(mappedBy = "category")
+    @JsonManagedReference
     private List<Product> products;
 
     @ManyToOne

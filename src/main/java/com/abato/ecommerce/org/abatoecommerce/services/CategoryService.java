@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
@@ -22,10 +23,19 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public ProductCategory addCategory(ProductCategory category) {
-        if (category!=null){
-            return categoryRepository.save(category);
+        if (category!=null ){
+            System.err.println("Category size: " + this.getAllCategories().spliterator().getExactSizeIfKnown());
+            if (this.getAllCategories().spliterator().getExactSizeIfKnown()<=0){
+                return categoryRepository.save(category);
+            }
+            System.out.println("list not null");
         }
         return null;
+    }
+
+    @Override
+    public List<ProductCategory> findAllCategories() {
+        return categoryRepository.findAllCategories();
     }
 
     @Override
