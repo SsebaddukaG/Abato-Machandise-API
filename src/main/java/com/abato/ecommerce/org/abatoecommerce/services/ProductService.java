@@ -29,11 +29,12 @@ public class ProductService implements IProductService {
                 }
             }
             else {
-                category = categoryService.findByCategoryCode(categoryCode).get();
-                product.setCategory(category);
-                productRepository.save(product);
-                System.err.println(product);
-                return product;
+                categoryService.findByCategoryCode(categoryCode).map(category1 -> {
+                    product.setCategory(category1);
+                    productRepository.save(product);
+                    return product;
+                        }
+                );
             }
         }
             return null;

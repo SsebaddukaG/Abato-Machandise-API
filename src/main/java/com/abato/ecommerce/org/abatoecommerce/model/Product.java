@@ -21,7 +21,10 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
+    @NotNull
     private int pdtId;
+
+    private String productCode;
 
     private String color;
 

@@ -10,7 +10,7 @@ public interface ICategoryService {
     List<ProductCategory> findAllCategories();
     ProductCategory addSubCategory(String categoryCode,ProductCategory category);
 
-    public boolean existsByName(String name);
+    public boolean existsByName(String categoryName);
 
     Optional<ProductCategory> getCategoryById(int id);
 

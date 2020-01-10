@@ -10,14 +10,6 @@ import java.util.Optional;
 public class ProductRepository extends AbstractDAO<Product> {
 
 
-    /*protected EntityManager entityManager;
-
-    @Override
-    public <S extends Product> S save(S s) {
-        if (s!=null) entityManager.persist(s);
-        return s;
-    }*/
-
     @Override
     public Optional<Product> findById(Integer integer) {
         return Optional.empty();

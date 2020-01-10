@@ -38,9 +38,12 @@ public class CategoryRepository extends AbstractDAO<ProductCategory> {
     }
 
     public Optional<ProductCategory> findByCategoryCode(String categoryCode){
-        return this.findAllCategories().stream()
-                .filter(category -> category.getCategoryCode().equalsIgnoreCase(categoryCode))
-                .findFirst();
+        if (categoryCode!=null){
+            return this.findAllCategories().stream()
+                    .filter(category -> String.valueOf(category.getCategoryCode()).equalsIgnoreCase(categoryCode))
+                    .findFirst();
+        }
+       return Optional.empty();
     }
 
     public List<ProductCategory> findAllCategories() {

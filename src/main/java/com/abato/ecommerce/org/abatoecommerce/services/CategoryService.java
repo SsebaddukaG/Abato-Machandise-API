@@ -47,18 +47,19 @@ public class CategoryService implements ICategoryService {
         }
         else{
             if (!this.existsByName(category.getCategoryName())){
-                ProductCategory found = this.findByCategoryCode(categoryCode).get();
-                category.setParent_category(found);
-                return categoryRepository.save(category);
+                 this.findByCategoryCode(categoryCode).map(found->{
+                    category.setParent_category(found);
+                    return categoryRepository.save(category);
+                });
             }
-            System.err.println("Category "  + category.getCategoryName() + " already exists");
-            return null;
         }
+        System.err.println("Category "  + category.getCategoryName() + " already exists");
+        return null;
     }
 
     @Override
-    public boolean existsByName(String name) {
-        return categoryRepository.existsByName(name);
+    public boolean existsByName(String categoryName) {
+        return categoryRepository.existsByName(categoryName);
     }
 
     @Override

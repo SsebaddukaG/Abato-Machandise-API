@@ -45,4 +45,12 @@ public class CategoryController {
     public ProductCategory addSubCategory(@PathVariable String categoryCode,@RequestBody ProductCategory category){
         return categoryService.addSubCategory(categoryCode,category);
     }
+
+    @GetMapping(value = "/ifExists/{name}")
+    public String exists(@PathVariable String name){
+        if (categoryService.existsByName(name)){
+            return "true";
+        }
+        return "false";
+    }
 }
